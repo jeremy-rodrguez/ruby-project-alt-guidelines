@@ -1,4 +1,4 @@
 class Student < ActiveRecord::Base
-    has_many :classes
-    has_many :ratings, through: :classes
+    has_many :ratings
+    has_many :klasses, through: :ratings
 end
