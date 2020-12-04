@@ -11,7 +11,9 @@ end
 end
 
 50.times do
-    Rating.create(student_id:Faker::Number.number(digits: 10), klass_id:Klass.all.sample.id)
+    Rating.create(student_id:Student.all.sample.id, klass_id:Klass.all.sample.id)
 end
 
 puts "done"
+
+# Faker::Number.number(digits: 10). Place this gem back in Rating and apply it to student_id if OG idea if trouble
