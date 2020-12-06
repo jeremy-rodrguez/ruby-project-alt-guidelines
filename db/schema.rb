@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_005846) do
     t.string "name"
     t.datetime "start_time"
     t.string "building"
+    t.integer "rating"
   end
 
   create_table "ratings", force: :cascade do |t|

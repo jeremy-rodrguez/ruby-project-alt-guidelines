@@ -4,6 +4,7 @@ class CreateKlasses < ActiveRecord::Migration[5.2]
       t.string :name
       t.datetime :start_time
       t.string :building
+      t.integer :rating
     end
   end
 end
