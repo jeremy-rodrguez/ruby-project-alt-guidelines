@@ -2,14 +2,13 @@ class CommandLineInterface
 
     def greet
         puts "Welcome to SKOOL, the single source of truth for all klass reviews!"
-        puts "Let's get started. What is your name?"
-        user_inp = gets.chomp
-        puts "Hello #{user_inp}! Please select from the following:"
-        puts "1. Create a new student"
-        puts "2. View our most popular klasses"
+        # user_inp = gets.chomp -- (#{user_inp})
+        puts "Let's get started. Please select from the following:"
+        puts "1. Add your name to our student directoy to view and create SKOOL ratings"
+        puts "2. View our klass directory in conjunction with their respective ratings"
         puts "3. Update an existing klass name"
         puts "4. Remove a klass"
-        puts "5. Exit."
+        puts "5. Exit"
         user_input = gets.chomp
         self.run(user_input)
     end
@@ -17,24 +16,22 @@ class CommandLineInterface
     def run(user_input)
         case(user_input)
         when "1"
-            puts "Enter the student name that you would like to create."
-            name = gets.chomp
-            puts "Thank you! #{name} has been added to the directory."
-            # puts self.create
+            puts "Enter your name to add to the SKOOL directory:"
+            self.create_student
+            puts "Thank you for your interest in SKOOL. Your name has been added to the SKOOL directory."
         when "2"
-            puts "What klass would you like to take a look at?"
-            klass = gets.chomp
-            puts "Here's the list of students in #{klass}:"
-            # self.read
+            puts "Welcome, here's our SKOOL catalog! This includes the klass name, building, and rating (1 - 10) amongst SKOOL users."
+            self.read
+            # klass = gets.chomp
+            # puts "Here is the list:"
         when "3"
-            puts "Please enter the new name for the klass:"
-            klass_name = gets.chomp
-            puts "Success! The klass has been updated to #{klass_name}."
-            # puts self.update
+            self.update_klass_name
+            puts "Success! The klass has been updated."
         when "4"
             puts "Which klass would you like to remove?"
             klass_input = gets.chomp
-            puts "#{klass_input} has been deleted."
+            self.delete(klass_input)
+            puts "#{klass_input} has been removed."
             # puts self.delete
         else
             puts "Press * to confirm."
@@ -43,30 +40,45 @@ class CommandLineInterface
         end
     end
 
-    # def create
-    # stu = Student.new
-    # stu.name = "STUDENT NAME"
-    # stu.save (this saves the student in the directory.)
-    # end
+    def create_student
+        stu = gets.chomp
+        s1 = Student.new(name: "#{stu}")
+        s1.save
+        self.return_to_menu
+    end
 
-    # def read
-    #   self.most_popular_klass
-    #   self.where("rating = 7"), refers to Klass and returns 7 klasses.
-    # end
+    def read
+        # puts Klass.all.pluck(:name, :building, :rating)
+        Klass.all.each do |klass|
+            puts "name: #{klass.name}"
+            puts "building: #{klass.building}"
+            puts "rating: #{klass.rating}"
+            puts ""
+        end
+        self.return_to_menu
+    end
 
-    # def update
-    #   Movie.create(title: "Awesome Flick")
-    #   movie = Movie.find_by(title: "Awesome Flick")
-    #   movie.update(title: "Even Awesomer Flick")
-    #   movie.save
-    # end
+    def update_klass_name
+        puts "Please enter the name of the klass that you are looking for:"
+        upd_input = gets.chomp
+        stud = Klass.find_by(name: "#{upd_input}")
+        puts "Please enter the new name the klass that you wish to update:"
+        upd_input_new_name = gets.chomp
+        stud.update(name: "#{upd_input_new_name}")
+        self.return_to_menu
+    end
 
-    # def delete
-    #   Klass.create(name: "SOME NAME")
-    #   delete_klass = Klass.find_by(name: "SOME NAME")
-    #   klass.destroy
-    #   this works with an instance that I created, Goblin 101.
-    # end
+    def delete(klass_input)
+        k1 = Klass.find_by(name: "#{klass_input}")
+        k1.destroy
+        self.return_to_menu
+    end
+
+    def return_to_menu
+        puts "To return to the main menu, please press enter."
+        gets.chomp
+        self.greet
+    end
 
     def exit
         puts "Thank you for visiting SKOOL. Have a great day!"

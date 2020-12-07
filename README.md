@@ -1,4 +1,4 @@
-Module One Final Project
+<!-- Module One Final Project
 ========================
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
@@ -399,4 +399,4 @@ It's time to show off your creation to the world! Things you might want to do ar
 ---
 
 ## Common question
-How do I turn off my SQL logger? `ruby # in config/environment.rb add this line: ActiveRecord::Base.logger = nil`
+How do I turn off my SQL logger? `ruby # in config/environment.rb add this line: ActiveRecord::Base.logger = nil` -->
