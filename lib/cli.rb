@@ -2,7 +2,6 @@ class CommandLineInterface
 
     def greet
         puts "Welcome to SKOOL, the single source of truth for all klass reviews!"
-        # user_inp = gets.chomp -- (#{user_inp})
         puts "Let's get started. Please select from the following:"
         puts "1. Add your name to our student directoy to view and create SKOOL ratings"
         puts "2. View our klass directory in conjunction with their respective ratings"
@@ -22,8 +21,6 @@ class CommandLineInterface
         when "2"
             puts "Welcome, here's our SKOOL catalog! This includes the klass name, building, and rating (1 - 10) amongst SKOOL users."
             self.read
-            # klass = gets.chomp
-            # puts "Here is the list:"
         when "3"
             self.update_klass_name
             puts "Success! The klass has been updated."
@@ -32,7 +29,6 @@ class CommandLineInterface
             klass_input = gets.chomp
             self.delete(klass_input)
             puts "#{klass_input} has been removed."
-            # puts self.delete
         else
             puts "Press * to confirm."
             ex = gets.chomp
